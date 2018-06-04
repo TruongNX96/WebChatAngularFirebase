@@ -7,7 +7,7 @@
 # Usage
 ## 1. Setup environment
 ### NodeJS:
-- Install ang Setup NodeJS: https://nodejs.org/en/download/
+- Install and Setup NodeJS: https://nodejs.org/en/download/
 - Check version: *node -v*
 ### Npm: 
 - Check version: npm -v
