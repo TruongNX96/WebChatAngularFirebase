@@ -1,0 +1,18 @@
+<div class="container mt-5">
+        <div class="row">
+          <div class="col-12 col-sm-3 col-md-3"></div>
+          <div class="col-12 col-sm-6 col-md-6">
+            <ul class="nav nav-pills nav-justified"  *ngIf="!authService.account">
+              <li class="nav-item">
+                <a class="nav-link" routerLinkActive="active" routerLink='/auth/signup'>Sign Up</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{ exact : true}" routerLink='/auth'>Sign In</a>
+              </li>
+            </ul>
+            <router-outlet></router-outlet>
+          </div>
+          <div class="col-12 col-sm-3 col-md-3"></div>
+          
+        </div>
+      </div>

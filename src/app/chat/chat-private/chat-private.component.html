@@ -1,0 +1,34 @@
+<div class=" col-10 col-sm-12 col-md-10">
+    <h1 class="mb-3 mt-4 text-center text-dark">Chat with {{userChatPrivate.info.fullName}}</h1>
+    <div id="scroller1" #scroller1>
+        <div *ngFor="let msg of listMsgPrivate" id="content" class="mb-3">
+            <div class="bg-info text-light px-3">
+                <span>
+                    From: {{msg.email}}
+                </span>
+                <span style="float:right">
+                    {{msg.time}}
+                </span>
+            </div>
+            <div id="content1" class="mb-5 px-3 text-danger">
+                <p class="py-2">
+                    {{msg.msg}}
+                </p>
+            </div>
+        </div>
+    </div>
+    <div>
+        <form [formGroup]="chatPrivateForm">
+            <div *ngIf=" statusPrivate == 'true' && uidPrivate !== this.authService.currentUserID">{{userChatPrivate.info.fullName}} typing ...</div>
+            <textarea style="width: 100%" class="form-group" name="textarea" id="textarea" rows="4" placeholder="Write a reply ......."
+                formControlName="textarea"></textarea>
+            <div class="row" style="width: 100%;">
+                <div class="col-12 col-sm-3 col-md-3"></div>
+                <div class="col-12 col-sm-6 col-md-6">
+                    <button class="btn btn-primary" [disabled]="!textarea.value" (click)="onSendPrivate(textarea.value)" style="width:100%;font-size: 22px;">Send</button>
+                </div>
+                <div class="col-12 col-sm-3 col-md-3"></div>
+            </div>
+        </form>
+    </div>
+</div>

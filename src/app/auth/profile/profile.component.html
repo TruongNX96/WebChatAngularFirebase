@@ -1,0 +1,8 @@
+<div class="container col-10 col-sm-12 col-md-10 text-center">
+    <h1 class="mb-3 mt-4 text-center text-dark">{{infoUser[2]}}</h1>
+    <div id = "avatar" class="col-4 m-auto position-relative">
+        <img [(src)]="avatarUser" alt="Avatar {{infoUser[2]}}">
+        <input class="avatar-input position-absolute" type="file" (change)="onChangeAvatar($event)">
+    </div>
+    <p class="mb-3 mt-4 text-center text-dark">{{infoUser[1]}}</p>
+</div>

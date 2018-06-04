@@ -1,0 +1,50 @@
+<div class=" col-10 col-sm-12 col-md-10">
+  <div class="col-8 coll-sm-8 col-md-8 float-left">
+    <h1 class="mb-3 mt-4 text-center text-dark">Chat Messages</h1>
+    <div id="scroller1" #scroller1>
+      <div *ngFor="let msg of listMsg" id="content" class="mb-3">
+        <div class="bg-info text-light px-3">
+          <span>
+            From: {{msg.email}}
+          </span>
+          <span style="float:right">
+            {{msg.time}}
+          </span>
+        </div>
+        <div id="content1" class="mb-5 px-3 text-danger">
+          <p class="py-2">
+            {{msg.msg}}
+          </p>
+        </div>
+      </div>
+    </div>
+    <div>
+      <form [formGroup]="chatForm">
+        <div *ngIf=" status == 'true' && uid !==authService.account.uid">Someone is typing ...</div>
+        <textarea style="width: 100%" class="form-group" name="textarea" id="textarea" rows="4" placeholder="Write a reply ......."
+          formControlName="textarea"></textarea>
+        <div class="row" style="width: 100%;">
+          <div class="col-12 col-sm-3 col-md-3"></div>
+          <div class="col-12 col-sm-6 col-md-6">
+            <button class="btn btn-primary" [disabled]="!textarea.value" (click)="onSend(textarea.value)" style="width:100%;font-size: 22px;">Send</button>
+          </div>
+          <div class="col-12 col-sm-3 col-md-3"></div>
+
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="col-3 coll-sm-3 col-md-3 float-right" *ngIf="allUser.length >= 1" id="scroller2" #scroller2>
+    <h2 class="mb-3 mt-4 text-center text-dark">List User</h2>
+      <div *ngFor="let user of allUser ,let index = index" >
+          <ul class="list-group" *ngIf="user.info">
+            <li class="list-group-item" routerLink="/chat-private"
+            (click)="chatPrivateMethod(user)"
+            *ngIf="user.info.uid !== currentUserID"
+            style="color: #dc3545;">{{user.info.fullName}}
+              <span class="badge" style="color: #343a40;">{{user.info.email}}</span>
+            </li>
+        </ul>
+      </div>
+  </div>
+</div>

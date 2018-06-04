@@ -1,0 +1,42 @@
+<div class="container">
+  <div *ngIf="authService.account" class="text-center">
+    <h1 style="">Hello {{infoUser[2]}} ! </h1>
+    <h3 style="color: #c3002f;" class="mb-2 mt-5">What are you thinking?</h3>
+    <a class="btn btn-info mr-3 mt-3" routerLink="/book/bookself">Go to Your Books</a>
+    <a class="btn btn-danger mx-3  mt-3" routerLink="/chat">Go to Chat</a>
+    <a class="btn btn-info ml-3 mt-3" routerLink="/book/search">Go to Search Books</a>
+  </div>
+  <div class="" *ngIf="!authService.account">
+    <form class="example-form mt-2" #signinForm="ngForm">
+
+      <mat-form-field class="example-full-width mb-3">
+        <input matInput placeholder="Your email" name="email" #email="ngModel" [(ngModel)]="email2" email required ngModel pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+        <mat-error *ngIf="email.errors?.pattern &&( email.dirty || email.touched)">
+          Email not valid!
+        </mat-error>
+        <mat-error *ngIf="email.errors?.required &&( email.dirty || email.touched)">
+          Email not
+          <strong>empty!</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width mb-3">
+        <input matInput placeholder="Your password" [(ngModel)]="password2" name="password" #password="ngModel" required ngModel
+          pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$" [type]="hide ? 'password' : 'text'">
+        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+        <mat-error *ngIf="password.errors?.pattern &&( password.dirty || password.touched)">
+          Password not valid!
+        </mat-error>
+        <mat-error *ngIf="password.errors?.required &&( password.dirty || password.touched)">
+          Password not
+          <strong>empty!</strong>
+        </mat-error>
+      </mat-form-field>
+      <div class="row">
+        <div class="col-12 col-sm-1 col-md-1"></div>
+        <button mat-raised-button color="primary" style="font-size: 20px;border-radius: 30px;" [disabled]="!signinForm.valid" (click)="signin()" class="col-12 col-sm-10 col-md-10 py-2">Sign In</button>
+        <div class="col-12 col-sm-1 col-md-1"></div>
+      </div>
+    </form>
+  </div>
+</div>

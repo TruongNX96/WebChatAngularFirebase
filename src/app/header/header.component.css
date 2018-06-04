@@ -1,0 +1,13 @@
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: rgba(255,255,255,.5);
+    background-color: unset;
+}
+#chat a {
+    color: #dc3545 !important;
+}
+#bookself a {
+    color: #dc3545 !important;
+}
+#search a {
+    color: #dc3545 !important;
+}

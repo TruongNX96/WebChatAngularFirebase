@@ -1,0 +1,30 @@
+<div>
+  <input type="text" style="font-size: 20px;" placeholder="Search..." #iptSearch class="form-control mt-3 mx-auto col-12 col-sm-8 col-md-8 "
+    (keyup)="onSearch(iptSearch.value)">
+  <br>
+  <div class="row">
+    <div *ngFor="let book of dataBook,let index = index" class="col-12 col-sm-6 col-md-6 text-center row bg-light pl-0 mb-5">
+      <div class="img-book col-12 col-sm-5 col-md-5 pl-0 hover14">
+        <a href="{{book.volumeInfo.infoLink}}" target="_blank">
+          <div *ngIf="book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.smallThumbnail">
+            <figure>
+              <img src="{{ book.volumeInfo.imageLinks.smallThumbnail}}" alt="{{book.volumeInfo.title}}" class="img-responsive">
+            </figure>
+          </div>
+          <div *ngIf="book.volumeInfo.imageLinks && !book.volumeInfo.imageLinks.smallThumbnail && book.volumeInfo.imageLinks.thumbnail">
+            <figure>
+              <img src="{{ book.volumeInfo.imageLinks.thumbnail}}" alt="{{book.volumeInfo.title}}" class="img-responsive">
+            </figure>
+          </div>
+        </a>
+      </div>
+      <div class="not-img-book col-12 col-sm-6 col-md-6">
+        <h3 class="text-danger mt-3 font-weight-bold title-book">{{book.volumeInfo.title }}</h3>
+        <p class="mt-3 font-weight-bold description-book">Authors: {{book.volumeInfo.authors }}</p>
+        <button mat-raised-button color="primary" (click)="addBook(book)">
+          Add to List Book</button>
+      </div>
+
+    </div>
+  </div>
+</div>

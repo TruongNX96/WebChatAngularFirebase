@@ -1,0 +1,36 @@
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+  .example-button-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+  div#img-book a img {
+    width: 70%;
+    height: auto;
+}
+
+div#img-book a {
+    float: left;
+    width: 100%;
+}
+div#img-book {
+    float: left;
+    width: 100%;
+    overflow: hidden;
+}
+div#one-book {
+  float: left;
+  overflow: hidden;
+}
+div#all-book{
+  border-top: 4px solid #c3002f;
+  width: 100%;
+}

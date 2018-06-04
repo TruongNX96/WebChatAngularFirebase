@@ -1,0 +1,31 @@
+<nav class="navbar navbar-expand-md bg-info navbar-dark" style="position: relative;">
+  <!-- Brand -->
+  <div class="container">
+    <a class="navbar-brand text-light" routerLink="/" style="font-size: 40px">ngProject</a>
+
+    <!-- Toggler/collapsibe Button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar links -->
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <ul class="nav navbar-nav nav-pills" role="tablist">
+        <li class="nav-item" #serchBook id={{isSearch}}>
+          <a class="nav-link" data-toggle="pill" routerLink="/book/search">Search Book</a>
+        </li>
+        <li class="nav-item #bookSelf" id={{isBook}}>
+          <a class="nav-link" data-toggle="pill" routerLink="/book/bookself">Book Self</a>
+        </li>
+        <li class="nav-item" #chat  id={{isChat}}>
+          <a class="nav-link" data-toggle="pill" routerLink="/chat">Chat</a>
+        </li>
+      </ul>
+      <span class="navbar-text ml-auto">
+        <button *ngIf="authService.account" class="btn btn-success" routerLink="/profile">Hi {{authService.infoUser[2]}}</button>
+        <button *ngIf="!authService.account" class="btn btn-success" routerLink="/auth">SignIn/ SignUp</button>
+        <button *ngIf="authService.account" class="btn btn-danger" routerLink="/auth" (click)="logout()">Log Out</button>
+      </span>
+    </div>
+  </div>
+</nav>

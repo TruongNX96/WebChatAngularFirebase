@@ -1,0 +1,123 @@
+<div class="col-12 row pt-4 ">
+  <h1 class="text-left col-12 col-sm-6 col-md-6 d-inline-block " style="color: #c3002f;">Library books </h1>
+  <div class="col-12 col-md-6 col-sm-6 ml-auto  d-inline-block text-right">
+    <button mat-raised-button color="accent" data-toggle="modal" data-target="#creatBook">Creat Book</button>
+  </div>
+
+  <div class="row p-2 pt-5" *ngIf="libraryBook.length >= 1" id="all-book">
+    <div *ngFor="let book of libraryBook.reverse(),let index = index" class="col-12 col-sm-3 col-md-3 text-center mb-5" id="one-book">
+      <!-- /--------------Detail Book------------------/ -->
+      <div class="modal fade" id="detailBook{{index}}">
+        <div class="modal-dialog">
+          <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title text-danger">{{book.book.volumeInfo.title }}</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div *ngIf="book.book.volumeInfo.imageLinks && book.book.volumeInfo.imageLinks.smallThumbnail">
+              <figure>
+                <img src="{{ book.book.volumeInfo.imageLinks.smallThumbnail}}" alt="{{book.book.volumeInfo.title}}" class="img-responsive">
+              </figure>
+            </div>
+            <div *ngIf="book.book.volumeInfo.imageLinks && !book.book.volumeInfo.imageLinks.smallThumbnail">
+              <figure>
+                <img src="https://semantic-ui.com/images/wireframe/image.png" alt="{{book.book.volumeInfo.title}}" class="img-responsive">
+              </figure>
+            </div>
+            <p class="my-2" style="color:#333">Author: {{book.book.volumeInfo.authors }}</p>
+            <p class="" style="color:#333">Description: {{book.book.volumeInfo.description }}</p>
+          </div>
+        </div>
+      </div>
+      <!-- /--------------End Detail Book------------------/ -->
+      <div class="mb-3 col-12 hover15" id="img-book">
+        <a href="book.book.volumeInfo.infoLink" target="_blank">
+          <figure>
+            <img src="{{ book.book.volumeInfo.imageLinks.smallThumbnail}}" alt="{{book.book.volumeInfo.title}}" class="img-responsive"
+              *ngIf="book.book.volumeInfo.imageLinks.smallThumbnail != null">
+            <img src="https://semantic-ui.com/images/wireframe/image.png" alt="{{book.book.volumeInfo.title}}" class="img-responsive"
+              *ngIf="book.book.volumeInfo.imageLinks.smallThumbnail == null">
+          </figure>
+        </a>
+      </div>
+      <p class="font-weight-bold" style="color:brown;width: 100%;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">{{book.book.volumeInfo.title }}</p>
+      <p class="" style="color:#333;width: 100%;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">Author: {{book.book.volumeInfo.authors }}</p>
+      <button class="btn btn-primary" (click)="delBook(book.book.id)">Delete</button>
+      <button class="btn btn-primary" data-toggle="modal" [attr.data-target]="'#detailBook' + index">Detail</button>
+    </div>
+  </div>
+  <div *ngIf="libraryBook.length ==0" style="width: 100%">
+    <h2 class="mt-5 text-center">Library book is empty!</h2>
+  </div>
+</div>
+
+
+<!-- /--------------Creat book------------------/ -->
+<div class="modal fade" id="creatBook">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h3 class="modal-title text-danger text-center">CREAT BOOK</h3>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <form class="example-form" #creatBookForm="ngForm">
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Book ID" name="bookid" #bookid="ngModel" [(ngModel)]="bookid2" required ngModel pattern="[0-9a-zA-Z]{3,}">
+            <mat-error *ngIf="bookid.errors?.pattern &&( bookid.dirty || bookid.touched)">
+              Book ID not valid!
+            </mat-error>
+            <mat-error *ngIf="bookid.errors?.required &&( bookid.dirty || bookid.touched)">
+              Book ID not
+              <strong>empty!</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Author" name="authors" #authors="ngModel" [(ngModel)]="authors2" required ngModel pattern="[0-9a-zA-Z]{3,}">
+            <mat-error *ngIf="authors.errors?.pattern &&( bookid.dirty || bookid.touched)">
+              Author not valid!
+            </mat-error>
+            <mat-error *ngIf="authors.errors?.required &&( bookid.dirty || bookid.touched)">
+              Author not
+              <strong>empty!</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width mb-3">
+            <input matInput placeholder="Title Book" name="title" #title="ngModel" [(ngModel)]="title2" title required ngModel>
+
+            <mat-error *ngIf="title.errors?.required &&( title.dirty || title.touched)">
+              Title not
+              <strong>empty!</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width mb-3">
+            <input matInput placeholder="Description Book" name="description" #description="ngModel" [(ngModel)]="description2" description
+              required ngModel>
+            <mat-error *ngIf="description.errors?.required &&( description.dirty || description.touched)">
+              Description not
+              <strong>empty!</strong>
+            </mat-error>
+          </mat-form-field>
+          <div class="example-full-width mb-3">
+            <input type="file" name="file" (change)="onChange($event)" required>
+          </div>
+          <div class="row">
+            <div class="col-12 col-sm-1 col-md-1"></div>
+            <button mat-raised-button color="primary" data-dismiss="modal" style="font-size: 20px" [disabled]="!creatBookForm.valid" (click)="creatBook()" class="col-12 col-sm-10 col-md-10 py-2">Creat Book</button>
+            <div class="col-12 col-sm-1 col-md-1"></div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

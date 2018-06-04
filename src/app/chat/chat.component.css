@@ -1,0 +1,14 @@
+div#content1 {
+    border: 1px solid #17a2b8;
+    background-color: #e4e4e487;
+    font-size: 20px;
+}
+div#scroller1 {
+    height: 400px;
+    overflow-y: scroll;
+}
+div#scroller2 {
+    height: 400px;
+    overflow-y: scroll;
+}
+
